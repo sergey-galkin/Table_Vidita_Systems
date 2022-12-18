@@ -1,0 +1,19 @@
+.searchBar {
+  display: flex;
+  flex-direction: column;
+}
+.searchBar > h2 {
+  text-align: center;
+  margin: 10px 0;
+}
+.block {
+  line-height: 25px;
+  margin: 5px 0;
+  
+}
+.block select {
+  padding: 2px;
+}
+.rightAlign {
+  text-align: right;
+}

@@ -1,0 +1,36 @@
+.btn {
+  display: block;
+  margin: 30px auto;
+  border: 0;
+  border-radius: 10px;
+  background: var(--color-1);
+  width: 40%;
+  max-width: 300px;
+  min-width: 200px;
+  padding: 20px 0;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+  color: black;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: var(--color-2);
+}
+.btn:focus-visible {
+  outline: none;
+}
+
+@media screen and (min-width: 600px) {
+}
+@media screen and (min-width: 768px) {
+  .btn {
+    min-width: 300px;
+    padding: 30px;
+    font-size: 1.4em;
+  }
+}
+@media screen and (min-width: 992px) {
+}
+@media screen and (min-width: 1200px) {
+}

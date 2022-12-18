@@ -1,0 +1,25 @@
+table {
+  border-collapse: collapse;
+  border: 1px solid #c7c7c7;;
+  text-align: center;
+  margin-left: 50px;
+}
+th, td {
+  padding: 10px;
+}
+.head tr {
+  border-bottom: 2px solid #c7c7c7;
+}
+.head th {
+  background: var(--color-1);
+}
+.rightAlign {
+  text-align: right;
+}
+.oddRow {
+  background: #f0f0f0;
+}
+.footer {
+  background: #c0eefc;
+  text-align: left;
+}
