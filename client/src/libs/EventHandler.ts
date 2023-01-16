@@ -1,5 +1,12 @@
+type Handlers = {
+  [key: string]: (event: Event) => void
+}
+
 export default class {
-  constructor(element, handlers = {}) {
+  element: HTMLElement;
+  handlers: Handlers;
+
+  constructor(element: HTMLElement, handlers: Handlers = {}) {
     this.element = element;
     this.handlers = handlers;
   }

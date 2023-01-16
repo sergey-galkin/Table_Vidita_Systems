@@ -5,7 +5,7 @@ module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
   entry: {
-    index: './src/index.js',
+    index: './src/index.tsx',
   },
   output: {
     filename: 'js/[name].[contenthash].js',
@@ -28,38 +28,29 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['.js', '.jsx', '...']
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '...']
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-modules-typescript-loader', 'css-loader'],
       },
       {
-        test: /\.m?js$/i,
+        test: /\.(j|t)sx?$/i,
         exclude: /[\\/]node_modules[\\/]/,
         use: [
           {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env']
-            }
+            loader: 'ts-loader',
           },
         ],
       },
       {
-        test: /\.jsx$/i,
+        test: /\.js$/i,
+        use: ['source-map-loader'],
+        enforce: 'pre',
         exclude: /[\\/]node_modules[\\/]/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-            },
-          },
-        ],
-      },
+      }
     ]
   },
   optimization: {

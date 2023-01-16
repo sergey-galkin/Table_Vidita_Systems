@@ -1,7 +1,14 @@
-import React, { memo } from 'react'
+import * as React from 'react'
+import { memo } from 'react'
 import css from './Checkbox.module.css'
 
-const Checkbox = memo(({ checked, index, toggle }) => {
+interface Params {
+  checked: boolean, 
+  index: number, 
+  toggle: (index: number) => void
+}
+
+const Checkbox = memo(({ checked, index, toggle }: Params) => {
   return (
     <label>
       <input type="checkbox" checked={checked || false} className={css.invisible} onChange={() => toggle(index)}/>

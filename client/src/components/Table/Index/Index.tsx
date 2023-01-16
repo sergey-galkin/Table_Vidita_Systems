@@ -1,16 +1,18 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import * as React from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { selectFilteredDocs } from '../../SearchBar/filteredDocsSlice';
 import Checkbox from '../Checkbox/Checkbox';
 import { setChosenDocs } from '../chosenDocsSlice';
 import Footer from '../Footer/Footer';
 import css from './Index.module.css'
+import type { TableHeaders } from '../../../App';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 
-const Table = ({ headers }) => {
-  const filteredDocs = useSelector(selectFilteredDocs);
+const Table = ({ headers }: {headers: TableHeaders}) => {
+  const filteredDocs = useAppSelector(selectFilteredDocs);
   const [checkboxes, setCheckboxes] = useState(() => filteredDocs.map(() => false))
   const [groupCheckbox, setGroupCheckbox] = useState(false)
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const areAllCheckboxesChecked = useCallback(() => {
     if (!checkboxes.length) return false;
@@ -38,7 +40,7 @@ const Table = ({ headers }) => {
     setCheckboxes(filteredDocs.map(() => false));
   }, [filteredDocs])
   
-  const toggleCheckbox = useCallback((i) => {
+  const toggleCheckbox = useCallback((i: number) => {
     setCheckboxes(p => {
       const clone = [...p];
       clone[i] = !clone[i]
@@ -57,10 +59,10 @@ const Table = ({ headers }) => {
           <th>№</th>
           {headers.map(h => <th key={h.value}>{h.value}</th>)}
           <th>Всего</th>
-          <th><Checkbox checked={groupCheckbox} toggle={toggleGroupCheckbox}/></th>
+          <th><Checkbox checked={groupCheckbox} index={0} toggle={toggleGroupCheckbox}/></th>
         </tr>
       </thead>
-      <tbody className={css.body}>
+      <tbody>
         {filteredDocs.map((doc, i) => 
           <tr key={doc.id} className={i % 2 ? '' : css.oddRow} >
             <td className={css.rightAlign}>{i + 1}</td>

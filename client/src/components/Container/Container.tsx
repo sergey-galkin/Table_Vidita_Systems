@@ -1,7 +1,7 @@
-import React from 'react'
+import * as React from 'react'
 import css from './Container.module.css'
 
-const Container = (props) => {
+const Container = (props: {[key: string]: any}) => {
   return (
     <div className={css.container} {...props} />
   )

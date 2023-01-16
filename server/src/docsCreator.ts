@@ -1,4 +1,4 @@
-exports.createRandomDoc = function (i) {
+export const createRandomDoc = function (i: number) {
   const names = ['Телевизор', 'Телефон', 'Наушники', 'Ноутбук', 'Клавиатура', 'Мышь', 'Стол', 'Стул', 'Кровать', 'Диван'];
   const random = Math.random();
   return {

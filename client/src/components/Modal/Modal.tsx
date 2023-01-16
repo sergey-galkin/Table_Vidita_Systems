@@ -1,14 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import css from './Modal.module.css';
 import { useSpring, animated } from '@react-spring/web'
 import EventHandler from '../../libs/EventHandler';
-import { useSelector } from 'react-redux';
 import { selectChosenDocs } from '../Table/chosenDocsSlice';
 import Button from '../Button/Button';
 import axios from 'axios'
+import { useAppSelector } from '../../app/hooks';
 
-const Modal = ({ closeModal }) => {
-  const chosenDocs = useSelector(selectChosenDocs);
+const Modal = ({ closeModal }: { closeModal: () => void } ) => {
+  const chosenDocs = useAppSelector(selectChosenDocs);
   const [requestStage, setRequestStage] = useState(0);
   const [message, setMessage] = useState('');
 
@@ -34,14 +35,14 @@ const Modal = ({ closeModal }) => {
     }, animationDudation);
   };
 
-  const anullDocs = () => {
+  const annullDocs = () => {
     setRequestStage(1);
     axios.post('/cancel', chosenDocs.map(doc => doc.id))
       .then(res => {
         setRequestStage(2);
         setMessage(res.data);
       })
-      .catch(err => {
+      .catch(() => {
         setRequestStage(2);
         setMessage('Во время передачи данных произошла ошибка.');
       })
@@ -50,11 +51,11 @@ const Modal = ({ closeModal }) => {
 
   const escapeKeydownEH = useMemo(() =>
     new EventHandler(
-      document, { 'keydown': handleEscapeButton }
+      document.body, { 'keydown': handleEscapeButton }
     )
   , [])
 
-  function handleEscapeButton(e) {
+  function handleEscapeButton(e: KeyboardEvent) {
     e = e || window.event;
     if (e.code !== 'Escape') return;
     closeModalHandler();
@@ -80,7 +81,7 @@ const Modal = ({ closeModal }) => {
                 })}
               </p>
               <div className={css.buttonsHolder}>
-                <Button onClick={anullDocs} classesArr={[css.acceptBtn]}>Применить</Button>
+                <Button onClick={annullDocs} classesArr={[css.acceptBtn]}>Применить</Button>
                 <Button onClick={closeModalHandler}>Отклонить</Button>
               </div>
             </>
